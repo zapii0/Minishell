@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/07/08 14:18:55 by apieniak         ###   ########.fr       */
+/*   Created: 2024/12/03 14:58:00 by apieniak          #+#    #+#             */
+/*   Updated: 2024/12/20 15:35:58 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
-# define TRUE 1
-# define FALSE 0
+void	ft_bzero(void *str, size_t n)
+{
+	size_t	i;
+	char	*set;
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#endif
+	set = (char *)str;
+	i = 0;
+	while (i < n)
+	{
+		set[i] = 0;
+		i++;
+	}
+}

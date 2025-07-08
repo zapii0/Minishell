@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/07/08 14:18:55 by apieniak         ###   ########.fr       */
+/*   Created: 2024/12/06 14:40:56 by apieniak          #+#    #+#             */
+/*   Updated: 2024/12/23 14:39:00 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
-# define TRUE 1
-# define FALSE 0
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*arr;
+	size_t	memory;
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#endif
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (nmemb > SIZE_MAX / size)
+		return (NULL);
+	memory = nmemb * size;
+	arr = malloc(memory);
+	if (arr == NULL)
+		return (NULL);
+	ft_bzero(arr, memory);
+	return (arr);
+}

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/07/08 14:18:55 by apieniak         ###   ########.fr       */
+/*   Created: 2024/12/03 15:54:17 by apieniak          #+#    #+#             */
+/*   Updated: 2024/12/16 13:46:49 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
-# define TRUE 1
-# define FALSE 0
+void	*ft_memcpy(void *destination, const void *source, size_t num)
+{
+	size_t			i;
+	unsigned char	*cel;
+	unsigned char	*skad;
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#endif
+	if (!destination && !source)
+		return (NULL);
+	cel = (unsigned char *)destination;
+	skad = (unsigned char *)source;
+	i = 0;
+	while (i < num)
+	{
+		cel[i] = skad[i];
+		i++;
+	}
+	return (destination);
+}

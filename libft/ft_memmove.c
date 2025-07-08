@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/07/08 14:16:27 by apieniak         ###   ########.fr       */
+/*   Created: 2024/12/04 14:44:47 by apieniak          #+#    #+#             */
+/*   Updated: 2024/12/20 15:37:25 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-char	input_reader(void)
+void	*ft_memmove(void *dest, const void *src, size_t num)
 {
-	char	*buf;
+	char	*desttrans;
+	char	*srctrans;
+	size_t	i;
 
-	buf = readline("Minihuj$ ");
-	if (buf)
+	if (src == 0 && dest == 0)
+		return (NULL);
+	desttrans = (char *)dest;
+	srctrans = (char *)src;
+	if (desttrans > srctrans)
 	{
-		add_history(buf);
-		free(buf);
+		while (num-- > 0)
+		{
+			desttrans[num] = srctrans[num];
+		}
 	}
-}
-
-int	main(void)
-{
-	char	*line;
-
-	while (TRUE)
+	else
 	{
-		input_reader();
+		i = 0;
+		while (i < num)
+		{
+			desttrans[i] = srctrans[i];
+			i++;
+		}
 	}
+	return (dest);
 }
