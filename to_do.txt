@@ -1,0 +1,10 @@
+Signals:
+
+Obsluga:
+ - ctrl + d wychodzi z minishell
+ - ctrl + \ nie robi nic
+ - ctrl + c nowy prompt na new line
+______________________
+
+PARSING:
+
