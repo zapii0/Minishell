@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/08/14 14:12:53 by apieniak         ###   ########.fr       */
+/*   Created: 2025/08/14 14:23:12 by apieniak          #+#    #+#             */
+/*   Updated: 2025/08/14 18:44:15 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-char	*input_reader(void)
-{
-	char	*buf;
-
-	buf = readline("minishell$ ");
-	if (buf)
-	{
-		add_history(buf);
-	}
-	return (buf);
-}
+#include "../../include/minishell.h"
 
 int	main(void)
-{
-	char	*line;
+{	
 
-	rl_catch_signals = 0;
-	gather_signal();
-	while (TRUE)
+	 //PSEUDO KOD 
+	 //**env_list lub *env_list[] to 2D array zawierajacy sciezki do kazdej zmiennej srodowiskowej
+	 //informacje odnośnie tego będą płyneły ze sturktury
+
+
+	int i = 0;
+
+	while (__environ[i] != NULL)
 	{
-		line = input_reader();
-		if (!line)
-		{
-			printf("exit (ctrl + d)");
-			break ;
-		}
+		printf("%s\n", __environ[i]);
+		i++;
 	}
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/07/09 21:05:40 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:21:22 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <string.h>
+
+extern char **__environ;
+
+typedef struct s_env
+{
+	char *name;
+	char *value;
+	struct s_env *next;
+} t_env;
 
 // The function where sigaction is structed, and started
 void	gather_signal(void);
