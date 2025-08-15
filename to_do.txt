@@ -6,7 +6,7 @@
 #    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/14 14:22:30 by apieniak          #+#    #+#              #
-#    Updated: 2025/08/14 14:22:33 by apieniak         ###   ########.fr        #
+#    Updated: 2025/08/15 19:41:17 by apieniak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ _____________________
 
 BUILT-INS:
 - cd
-- echo with -n
+- echo with -n (done)
 - env (done (?))
 - exit
 - export
