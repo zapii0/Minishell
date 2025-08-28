@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/08/15 19:56:29 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:05:01 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,19 @@ typedef struct s_data
 	
 } t_data;
 
-// The function where sigaction is structed, and started
+//Intialize t_env structure and paste there all envs | structs.c
+t_env	*initialize_list(void);
+
+//_____________________________________________________________
+
+// The function where sigaction is structed, and started | signals.c
 void	gather_signal(void);
-// The function which handles signals
+// The function which handles signals | signals.c
 void	set_signals(int sig, siginfo_t *info, void *nothing);
-// The function which read input from the terminal
+
+//_____________________________________________________________
+
+// The function which read input from the terminal | main .c
 char	*input_reader(void);
 
 #endif

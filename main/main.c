@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/08/14 14:12:53 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:04:54 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ char	*input_reader(void)
 
 int	main(void)
 {
+	t_env	*env;
 	char	*line;
 
+	env = initialize_list();
 	rl_catch_signals = 0;
 	gather_signal();
 	while (TRUE)
