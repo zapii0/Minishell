@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/08/28 18:05:01 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:38:58 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct s_data
 
 //Intialize t_env structure and paste there all envs | structs.c
 t_env	*initialize_list(void);
+
+int	till_equal_sign(char *str);
+
+t_env	*list_arguments(t_env *current, char *env, int eq);
 
 //_____________________________________________________________
 
