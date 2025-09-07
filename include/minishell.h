@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/09/02 17:38:58 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/09/06 20:14:49 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <string.h>
+# include <stdbool.h>
 
 extern char **__environ;
 
@@ -43,10 +44,25 @@ typedef struct s_pipes
 	int old_pfd[2];
 } t_pipes;
 
+typedef struct s_base
+{
+	t_data *data;
+	int		d_counter;
+	char	**evp;
+	char	*binary;
+	char	*heredoc;
+	bool	pipe;
+}	t_base;
+
 typedef struct s_data
 {
-	
-} t_data;
+	char	**args;
+	char	*flags;
+	char	*red_out;
+	char	*red_in;
+	char	*pipe_out;
+	bool	redirection;
+}	t_data;
 
 //Intialize t_env structure and paste there all envs | structs.c
 t_env	*initialize_list(void);
