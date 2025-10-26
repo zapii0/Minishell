@@ -6,12 +6,12 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 06:38:17 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/21 06:40:35 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/26 03:11:04 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/parsing.h"
+#include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 int	ft_isspace(char c)
 {
@@ -34,8 +34,10 @@ int	is_delimiter(char c)
 	return (0);
 }
 
-void	list_creator(t_lex *lex)
+t_lex	*list_creator()
 {	
+	t_lex	*lex;
+	 
 	lex = malloc(sizeof(t_lex));
 	if (!lex)
 		return (NULL);

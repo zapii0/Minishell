@@ -6,12 +6,12 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:48:54 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/21 06:40:28 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/21 19:53:54 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/parsing.h"
+#include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 static int	get_quote_span(char *line, int i)
 {

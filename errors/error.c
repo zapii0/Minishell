@@ -6,12 +6,12 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/21 06:21:47 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/21 19:54:24 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/parsing.h"
+#include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 
 void	qoute_error(char *line)

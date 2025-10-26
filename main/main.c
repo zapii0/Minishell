@@ -6,12 +6,12 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/10/21 06:37:17 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/26 03:09:30 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/parsing.h"
+#include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 char	*input_reader(void)
 {
@@ -22,8 +22,8 @@ char	*input_reader(void)
 	if (buf)
 	{
 		add_history(buf);
-        list_creator(lex);
-        tokenizer(buf, lex);
+		lex = list_creator();
+		tokenizer(buf, lex);
 	}
 	return (buf);
 }

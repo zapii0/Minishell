@@ -53,6 +53,7 @@ typedef struct s_lex
 	
 }	t_lex;
 
+
 //		FUNCTIONS		//
 
 int	ft_isspace(char c);
@@ -69,5 +70,5 @@ void	qoute_error(char *line);
 void	syntax_error(t_lex *lex);
 void	error_red(t_lex *lex);
 void	error_red2(t_lex *lex);
-void	list_creator(t_lex *lex);
+t_lex	*list_creator();
 #endif
