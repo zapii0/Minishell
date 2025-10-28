@@ -71,4 +71,13 @@ void	syntax_error(t_lex *lex);
 void	error_red(t_lex *lex);
 void	error_red2(t_lex *lex);
 t_lex	*list_creator();
+void	tokenizer(char *line, t_lex *lex, t_env *envp);
+void	envp_filler(t_lex *lex, t_env *envp);
+char	*envp_value_checker(char *line, t_env *envp);
+char	*envp_value_swapper(char *line, int *i, t_env *envp);
+void	swapper_clean(char *a, char *b, char *c);
+char	*get_first(char *line, int i);
+char	*get_second(char *line, int *i, t_env *envp);
+char	*get_third(char *line, int i);
+char	*find_env_value(char *name, t_env *envp);
 #endif

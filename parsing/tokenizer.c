@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/28 22:00:32 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/28 23:10:26 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,22 @@ void	tokenizer(char *line, t_lex *lex, t_env *envp)
 			i = node_filler(line, i, lex);
 	}
 	syntax_error(lex);
-
-    t_lex *cur = lex->next; // pomijamy dummy node
-    while (cur)
-    {
-        printf("content: %s\n", cur->content);
-        cur = cur->next;
-    }
-	//envp_filler(lex, envp);
+	envp_filler(lex, envp);
+    // t_lex *cur = lex->next;
+    // while (cur)
+    // {
+    //     printf("content: %s\n", cur->content);
+    //     cur = cur->next;
+    // }
 	return ;
 }
 
 void	envp_filler(t_lex *lex, t_env *envp)
 {
-	int	i;
-
-	i = 0;
 	while (lex)
 	{
-		if(lex->content && ft_strchr(lex->content, '$'))
-			lex->content = envp_value_swap(lex->content, envp);
+		if (lex->content && ft_strchr(lex->content, '$'))
+			lex->content = envp_value_checker(lex->content, envp);
 		lex = lex->next;
 	}
 }
@@ -81,10 +77,35 @@ char	*envp_value_swapper(char *line, int *i, t_env *envp)
 	char	*first;
 	char	*second;
 	char	*third;
+	char	*tmp;
 
-	first = get_first(line, i);
-	second = get_second(line, *i, envp);
-	third = get_third(line, i);
+	first = get_first(line, *i);
+	second = get_second(line, i, envp);
+	third = get_third(line, *i);
+	if (!first || !second || !third)
+	{
+		swapper_clean(first, second, third);
+		return (NULL);
+	}
+	tmp = ft_strjoin(first, second);
+	if (!tmp)
+		return (swapper_clean(first, second, third), NULL);
+	free(line);
+	line = tmp;
+	tmp = ft_strjoin(tmp, third);
+	free(line);
+	swapper_clean(first, second, third);
+	return (tmp);
+}
+
+void	swapper_clean(char *a, char *b, char *c)
+{
+	if (a)
+		free(a);
+	if (b)
+		free(b);
+	if (c)
+		free(c);
 }
 
 char	*get_first(char *line, int i)
@@ -113,6 +134,7 @@ char	*get_second(char *line, int *i, t_env *envp)
 	int		j;
 	int		k;
 	char	*name;
+	char	*value;
 
 	j = 0;
 	k = 0;
@@ -128,7 +150,35 @@ char	*get_second(char *line, int *i, t_env *envp)
 		k++;
 	}
 	name[k] = '\0';
-	return (find_env_value(name, envp));
+	*i += j;
+	value = find_env_value(name, envp);
+	free(name);
+	if (!value)
+		return (NULL);
+	return (value);
+}
+
+char	*get_third(char *line, int i)
+{
+	char	*str;
+	int		j;
+
+	j = 0;
+	while (line[i + j])
+		j++;
+	if (j == 0)
+		return (ft_strdup(""));
+	str = calloc(j + 1, 1);
+	if (!str)
+		return (NULL);
+	j = 0;
+	while (line[i + j])
+	{
+		str[j] = line[i + j];
+		j++;
+	}
+	str[j] = '\0';
+	return (str);
 }
 
 char	*find_env_value(char *name, t_env *envp)
@@ -146,6 +196,6 @@ char	*find_env_value(char *name, t_env *envp)
 		}
 		envp = envp->next;
 	}
-	return (strdup(""));
+	return (ft_strdup(""));
 }
 
