@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/10/21 20:03:36 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/26 03:36:26 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	set_signals(int sig, siginfo_t *info, void *nothing);
 //_____________________________________________________________
 
 // The function which read input from the terminal | main .c
-char	*input_reader(void);
+char	*input_reader(t_env *envp);
 
 #endif

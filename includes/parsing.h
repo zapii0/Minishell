@@ -64,7 +64,7 @@ int	node_pipe(char *line, int i, t_lex *lex);
 int	quote_edge_case(char *line, int i, t_lex *lex);
 t_lex *node_creator(t_lex *lex);
 int	special_chars(char *line, int i, t_lex *lex);
-void	tokenizer(char *line, t_lex *lex);
+void	tokenizer(char *line, t_lex *lex, t_env *envp);
 void	error_exec(int error_code, int mess_code);
 void	qoute_error(char *line);
 void	syntax_error(t_lex *lex);

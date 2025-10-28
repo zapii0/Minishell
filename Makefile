@@ -9,10 +9,12 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 PARSING =  tokenizer.c utils.c utils2.c
 ERRORS = error.c
 MAIN = main.c
+INTIALIZE = structs.c
 
 SRC = $(addprefix parsing/, $(PARSING)) \
 		$(addprefix errors/, $(ERRORS)) \
-		$(addprefix main/, $(MAIN))
+		$(addprefix main/, $(MAIN)) \
+		$(addprefix intialize/, $(INTIALIZE))
 
 OBJ_FILES   = $(SRC:.c=.o)
 

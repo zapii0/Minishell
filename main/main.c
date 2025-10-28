@@ -6,14 +6,14 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/10/26 03:09:30 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/26 03:37:52 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
 
-char	*input_reader(void)
+char	*input_reader(t_env *envp)
 {
 	char	*buf;
     t_lex	*lex;
@@ -23,7 +23,7 @@ char	*input_reader(void)
 	{
 		add_history(buf);
 		lex = list_creator();
-		tokenizer(buf, lex);
+		tokenizer(buf, lex, envp);
 	}
 	return (buf);
 }
@@ -31,12 +31,14 @@ char	*input_reader(void)
 int	main(void)
 {
 	char	*line;
+	t_env	*envp;
 
 	//rl_catch_signals = 0;
 	//gather_signal();
+	envp = initialize_list();
 	while (TRUE)
 	{
-		line = input_reader();
+		line = input_reader(envp);
 		if (!line)
 		{
 			printf("exit (ctrl + d)");
