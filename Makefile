@@ -10,11 +10,13 @@ PARSING =  tokenizer.c utils.c utils2.c
 ERRORS = error.c
 MAIN = main.c
 INTIALIZE = structs.c
+ENVP = envp.c envp_utils.c
 
 SRC = $(addprefix parsing/, $(PARSING)) \
 		$(addprefix errors/, $(ERRORS)) \
 		$(addprefix main/, $(MAIN)) \
-		$(addprefix intialize/, $(INTIALIZE))
+		$(addprefix intialize/, $(INTIALIZE)) \
+		$(addprefix envp/, $(ENVP)) \
 
 OBJ_FILES   = $(SRC:.c=.o)
 
