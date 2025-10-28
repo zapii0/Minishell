@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/28 17:23:24 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/10/28 22:00:32 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	envp_filler(t_lex *lex, t_env *envp)
 	while (lex)
 	{
 		if(lex->content && ft_strchr(lex->content, '$'))
-			lex->content = envp_value_swap(lex->content);
+			lex->content = envp_value_swap(lex->content, envp);
 		lex = lex->next;
 	}
 }
 
-char	*envp_value_checker(char *line)
+char	*envp_value_checker(char *line, t_env *envp)
 {
 	int 	i;
 	bool	single_q;
@@ -70,19 +70,20 @@ char	*envp_value_checker(char *line)
 		if (line[i] == '"' && !single_q)
 			double_q = !double_q;
 		if (line[i] == '$' && !single_q)
-			line = envp_value_swapper(line, &i);
+			line = envp_value_swapper(line, &i, envp);
 		i++;
 	}
+	return (line);
 }
 
-char	*envp_value_swapper(char *line, int *i)
+char	*envp_value_swapper(char *line, int *i, t_env *envp)
 {
 	char	*first;
 	char	*second;
 	char	*third;
 
 	first = get_first(line, i);
-	second = get_second(line, *i);
+	second = get_second(line, *i, envp);
 	third = get_third(line, i);
 }
 
@@ -91,9 +92,7 @@ char	*get_first(char *line, int i)
 	char	*str;
 	int		j;
 
-	j = 0;
-	while (j < i)
-		j++;
+	j = i;
 	if (j == 0)
 		return (ft_strdup(""));
 	str = calloc(j + 1, 1);
@@ -109,7 +108,7 @@ char	*get_first(char *line, int i)
 	return (str);
 }
 
-char	*get_second(char *line, int *i)
+char	*get_second(char *line, int *i, t_env *envp)
 {
 	int		j;
 	int		k;
@@ -129,5 +128,24 @@ char	*get_second(char *line, int *i)
 		k++;
 	}
 	name[k] = '\0';
-	
+	return (find_env_value(name, envp));
 }
+
+char	*find_env_value(char *name, t_env *envp)
+{
+	char	*value;
+	
+	while (envp)
+	{
+		if (!ft_strcmp(name, envp->name))
+		{
+			value = ft_strdup(envp->value);
+			if (!value)
+				return (NULL);
+			return (value);
+		}
+		envp = envp->next;
+	}
+	return (strdup(""));
+}
+
