@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/28 23:18:33 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/04 15:44:04 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include "../includes/parsing.h"
 
 
-void	tokenizer(char *line, t_lex *lex, t_env *envp)
+t_base	tokenizer(char *line, t_lex *lex, t_env *envp)
 {
-	int	i;
+	int		i;
+	t_base	*base;
 
 	if (!envp)
 		return ;
@@ -31,11 +32,17 @@ void	tokenizer(char *line, t_lex *lex, t_env *envp)
 	}
 	syntax_error(lex);
 	envp_filler(lex, envp);
+	base = init_base(pipe_counter(lex));
+	if (!base)
+		return (free_base(base), NULL);
+	red_parser(lex, base, 0 , 0);
+	return (base);
+}
+
     // t_lex *cur = lex->next;
     // while (cur)
     // {
     //     printf("content: %s\n", cur->content);
     //     cur = cur->next;
     // }
-	return ;
-}
+	

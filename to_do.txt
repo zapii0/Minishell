@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    to_do.txt                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
+#    By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/14 14:22:30 by apieniak          #+#    #+#              #
-#    Updated: 2025/08/15 19:41:17 by apieniak         ###   ########.fr        #
+#    Updated: 2025/11/04 14:28:17 by mzapora          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,3 +82,10 @@ delimiter is seen. However, it doesn’t have to update the history!
 
 ◦ >> should redirect output in append mode.
 
+jeden error nie dziala 
+pipa w redire
+
+sprawdzam czy append ostatni jak tak to daje boola 
+pozniej kazdy append jest liczony po prostu jak >
+
+sprawdzam czy heredoc jest ostatni jak nie to tez traktuje je jako normalne 

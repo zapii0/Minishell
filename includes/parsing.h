@@ -22,7 +22,6 @@ typedef struct s_base   // DUZA STRUKTURA
 { 
 	t_data	*data; // ARRAY NA MNIEJSZE CZESCI COMMANDLINA 
 	int	d_counter; // ILOSC MNIEJSZYCH CZESCI
-	char	*binary; // PLIKI KTORE TRZEBA SPRAWDZIC CZY ISTNIEJA
 	char	*heredoc; // HEREDOC JESLI JEST NULL TO NIE MA JESLI JEST W SRODKU JEST LIMITER
 	bool	pipe; // BOOL CZY SA PIPY MOZLIWE ZE BEDZIE POMAGAC PRZY EGZE
 // 		BEDZIE TU LISTA NODEOW Z ENVAMI I ICH WARTOSCIAMI 
@@ -56,14 +55,14 @@ typedef struct s_lex
 
 //		FUNCTIONS		//
 
-int	ft_isspace(char c);
-int	is_limiter(char c);
-int	is_delimiter(char c);
-int	node_filler(char *line, int i, t_lex *lex);
-int	node_pipe(char *line, int i, t_lex *lex);
-int	quote_edge_case(char *line, int i, t_lex *lex);
-t_lex *node_creator(t_lex *lex);
-int	special_chars(char *line, int i, t_lex *lex);
+int		ft_isspace(char c);
+int		is_limiter(char c);
+int		is_delimiter(char c);
+int		node_filler(char *line, int i, t_lex *lex);
+int		node_pipe(char *line, int i, t_lex *lex);
+int		quote_edge_case(char *line, int i, t_lex *lex);
+t_lex	*node_creator(t_lex *lex);
+int		special_chars(char *line, int i, t_lex *lex);
 void	tokenizer(char *line, t_lex *lex, t_env *envp);
 void	error_exec(int error_code, int mess_code);
 void	qoute_error(char *line);
@@ -71,7 +70,7 @@ void	syntax_error(t_lex *lex);
 void	error_red(t_lex *lex);
 void	error_red2(t_lex *lex);
 t_lex	*list_creator();
-void	tokenizer(char *line, t_lex *lex, t_env *envp);
+t_base	tokenizer(char *line, t_lex *lex, t_env *envp);
 void	envp_filler(t_lex *lex, t_env *envp);
 char	*envp_value_checker(char *line, t_env *envp);
 char	*envp_value_swapper(char *line, int *i, t_env *envp);
@@ -80,4 +79,13 @@ char	*get_first(char *line, int i);
 char	*get_second(char *line, int *i, t_env *envp);
 char	*get_third(char *line, int i);
 char	*find_env_value(char *name, t_env *envp);
+void	free_single_data(t_data *data);
+void	free_base(t_base *base);
+void	free_str_array(char **arr); 
+t_data	*init_data(void);
+void	init_single_data(t_data *data);
+t_base	*init_base(int d_counter);
+int	pipe_counter(t_lex *lex);
+int	is_in_red(char *str);
+int	is_out_red(char *str);
 #endif
