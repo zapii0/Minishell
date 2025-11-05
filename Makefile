@@ -6,24 +6,27 @@ CFLAGS      = -Wall -Wextra -Werror
 LIBFT_DIR   = libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-PARSING =  tokenizer.c utils.c utils2.c
-ERRORS = error.c
-MAIN = main.c
-INTIALIZE = structs.c
-ENVP = envp.c envp_utils.c
+PARSING	= tokenizer.c utils.c utils2.c
+ERRORS		= error.c
+MAIN		= main.c
+INTIALIZE	= structs.c init.c
+ENVP		= envp.c envp_utils.c
+REDIRS		= red.c red_utils.c
+CLEAN		= clean_structs.c
 
-SRC = $(addprefix parsing/, $(PARSING)) \
-		$(addprefix errors/, $(ERRORS)) \
-		$(addprefix main/, $(MAIN)) \
-		$(addprefix intialize/, $(INTIALIZE)) \
-		$(addprefix envp/, $(ENVP)) \
+SRC = \
+	$(addprefix parsing/, $(PARSING)) \
+	$(addprefix errors/, $(ERRORS)) \
+	$(addprefix main/, $(MAIN)) \
+	$(addprefix intialize/, $(INTIALIZE)) \
+	$(addprefix envp/, $(ENVP)) \
+	$(addprefix redirections/, $(REDIRS)) \
+	$(addprefix clean/, $(CLEAN))
 
 OBJ_FILES   = $(SRC:.c=.o)
 
-# Jeśli jesteś na Linuxie — odkomentuj poniższą linię:
-# READLINE_FLAGS = -lreadline -lncurses
-# Jeśli na macOS, wystarczy:
-READLINE_FLAGS = -lreadline
+
+READLINE_FLAGS = -lreadline -lncurses
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

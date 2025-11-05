@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:38:50 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/04 14:42:50 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/05 01:31:49 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_in_red(char *str)
 {
 	if (!str)
 		return (0);
-	if (!ft_strcmp("<", str) || !ft_strcmp("<<", str))
+	if (!ft_strcmp("<", str))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:46:40 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/04 14:44:09 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/05 01:08:43 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ t_data	*init_data(void)
     data->args = NULL;
     data->red_out = NULL;
     data->red_in = NULL;
-    data->pipe_out = false;
     data->append = false;
-    data->redirection = false;
     return (data);
 }
 
@@ -34,9 +32,8 @@ void	init_single_data(t_data *data)
     data->args = NULL;
     data->red_out = NULL;
     data->red_in = NULL;
-    data->pipe_out = false;
+    data->b_heredoc = true;
     data->append = false;
-    data->redirection = false;
 }
 
 t_base	*init_base(int d_counter)
@@ -54,8 +51,6 @@ t_base	*init_base(int d_counter)
     while (i < d_counter)
         init_single_data(&base->data[i++]);
     base->d_counter = d_counter;
-    base->heredoc = NULL;
-    base->pipe = false;
     return (base);
 }
 

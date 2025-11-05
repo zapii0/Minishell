@@ -10,21 +10,18 @@
 
 typedef struct s_data // MNIEJSZA STURCTURA ZAWIERA FRAGMENT OD POCZATKU DO PIPA ALBO JESLI JEST TO DALEJ TO OD PIPA DO PIPA
 {
-	char **args; // TU BEDZIE CMD I JEJ ARGUMENTY
-	char **red_out; // MIEJSCE PRZEKIEROWANIA OUTPUTU JESLI JEST
-	char **red_in;	// MIEJSCE IMPUTU DO CMD JESLI JEST
-	bool pipe_out; // PIPE OUT NIE WIEM CZY BEDZIE W TAKIEJ FORMIE MYSLE O TYM JESZCZE
-	bool append;  // INFORMUJE CZY RED_OUT JEST APPENDEM
-	bool redirection; // BOOL CZY JEST RED NIE WIEM CZY TU BEDZIE CHYBA NIE 
+	char 	**args; // TU BEDZIE CMD I JEJ ARGUMENTY
+	char 	**red_out; // MIEJSCE PRZEKIEROWANIA OUTPUTU JESLI JEST
+	char 	**red_in;	// MIEJSCE IMPUTU DO CMD JESLI JEST
+	char	*heredoc;
+	bool	b_heredoc;
+	bool 	append;  // INFORMUJE CZY RED_OUT JEST APPENDEM
 }	t_data;
 
 typedef struct s_base   // DUZA STRUKTURA 
 { 
-	t_data	*data; // ARRAY NA MNIEJSZE CZESCI COMMANDLINA 
-	int	d_counter; // ILOSC MNIEJSZYCH CZESCI
-	char	*heredoc; // HEREDOC JESLI JEST NULL TO NIE MA JESLI JEST W SRODKU JEST LIMITER
-	bool	pipe; // BOOL CZY SA PIPY MOZLIWE ZE BEDZIE POMAGAC PRZY EGZE
-// 		BEDZIE TU LISTA NODEOW Z ENVAMI I ICH WARTOSCIAMI 
+	t_data	*data;
+	int	d_counter;
 }	t_base;
 
 
@@ -63,14 +60,13 @@ int		node_pipe(char *line, int i, t_lex *lex);
 int		quote_edge_case(char *line, int i, t_lex *lex);
 t_lex	*node_creator(t_lex *lex);
 int		special_chars(char *line, int i, t_lex *lex);
-void	tokenizer(char *line, t_lex *lex, t_env *envp);
 void	error_exec(int error_code, int mess_code);
 void	qoute_error(char *line);
 void	syntax_error(t_lex *lex);
 void	error_red(t_lex *lex);
 void	error_red2(t_lex *lex);
 t_lex	*list_creator();
-t_base	tokenizer(char *line, t_lex *lex, t_env *envp);
+t_base	*tokenizer(char *line, t_lex *lex, t_env *envp);
 void	envp_filler(t_lex *lex, t_env *envp);
 char	*envp_value_checker(char *line, t_env *envp);
 char	*envp_value_swapper(char *line, int *i, t_env *envp);
@@ -88,4 +84,11 @@ t_base	*init_base(int d_counter);
 int	pipe_counter(t_lex *lex);
 int	is_in_red(char *str);
 int	is_out_red(char *str);
+t_lex *clean_redirects(t_lex *lex);
+t_lex	*clean_two_nodes(t_lex *current, t_lex **head);
+t_lex	*red_parser(t_lex *lex, t_base *base);
+char	*find_heredoc_limiter(t_lex *lex, bool *use_heredoc);
+void	search_heredoc(t_lex *lex, t_base *base);
+void	fill_redirections(t_lex *lex, t_data *data);
+int	allocate_red_arrays(t_lex *lex, t_data *data);
 #endif
