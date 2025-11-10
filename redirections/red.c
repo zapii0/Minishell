@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:17:10 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/05 01:42:40 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/10 19:30:02 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 
 t_lex	*red_parser(t_lex *lex, t_base *base)
 {
-	int	current_data;
+	int		current_data;
 	t_lex	*start;
+	t_lex	*head;
 
+	head = lex;
 	current_data = 0;
 	search_heredoc(lex, base);
+	search_append(lex, base);
 	while (lex && current_data < base->d_counter)
 	{
 		start = lex;
@@ -33,8 +36,51 @@ t_lex	*red_parser(t_lex *lex, t_base *base)
 			lex = lex->next;
 		current_data++;
 	}
-	lex = clean_redirects(lex);
-	return (lex);
+	head = clean_redirects(head);
+	args_filler(head, base);
+	return (head);
+}
+
+static int	count_tok(t_lex *lex)
+{
+	t_lex	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = lex;
+	while (tmp && tmp->content && ft_strcmp("|", tmp->content))
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+void	args_filler(t_lex *lex, t_base *base)
+{
+	int	seg;
+	int		count;
+	int		j;
+
+	seg = 0;
+	while (lex && seg < base->d_counter)
+	{
+		count = count_tok(lex);
+		base->data[seg].args = ft_calloc(count + 1, sizeof(char *));
+		if (!base->data[seg].args)
+			return ;
+		j = 0;
+		while (j < count && lex && lex->content)
+		{
+			base->data[seg].args[j] = ft_strdup(lex->content);
+			j++;
+			lex = lex->next;
+		}
+		base->data[seg].args[j] = NULL;
+		if (lex && lex->content && !ft_strcmp("|", lex->content))
+			lex = lex->next;
+		seg++;
+	}
 }
 
 char	*find_heredoc_limiter(t_lex *lex, bool *use_heredoc)

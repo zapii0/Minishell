@@ -89,6 +89,8 @@ t_lex	*clean_two_nodes(t_lex *current, t_lex **head);
 t_lex	*red_parser(t_lex *lex, t_base *base);
 char	*find_heredoc_limiter(t_lex *lex, bool *use_heredoc);
 void	search_heredoc(t_lex *lex, t_base *base);
+void	search_append(t_lex *lex, t_base *base);
 void	fill_redirections(t_lex *lex, t_data *data);
 int	allocate_red_arrays(t_lex *lex, t_data *data);
+void	args_filler(t_lex *lex, t_base *base);
 #endif
