@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/21 19:54:24 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/11 17:14:47 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	qoute_error(char *line)
 
 	i = -1;
 	open = false;
+		limiter = '\0';
 	while (line[++i])
 	{
 		if ((line[i] == '"' || line[i] == '\'') && open == false)
@@ -29,7 +30,7 @@ void	qoute_error(char *line)
 			limiter = line[i];
 			open = true;
 		}
-		else if (line[i] == limiter && open == true)
+			else if (open == true && line[i] == limiter)
 		{
 			limiter = '\0';
 			open = false;

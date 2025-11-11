@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:04:38 by apieniak          #+#    #+#             */
-/*   Updated: 2025/10/26 03:22:12 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/11 15:25:26 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*initialize_list(void)
 {
 	extern char	**__environ;
 	t_env		*current;
-	t_env		*first;
+	t_env		*first = NULL;
 	int			eq;
 	int			i;
 
