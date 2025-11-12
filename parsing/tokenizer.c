@@ -6,13 +6,64 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/11 17:11:45 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/12 02:41:31 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
 
+static int	process_line_tokens(char *line, t_lex *lex)
+{
+	int i;
+	int res;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isspace(line[i]))
+			i++;
+		else if (is_limiter(line[i]))
+		{
+			res = node_filler(line, i, lex);
+			if (res == -1)
+				return (-1);
+			i = res;
+		}
+	}
+	return (0);
+}
+
+t_base	*tokenizer(char *line, t_lex *lex, t_env *envp)
+{
+	int		i;
+	t_base	*base;
+	t_lex  *lex_head;
+
+	if (!envp)
+		return (NULL);
+	lex_head = lex;
+	qoute_error(line);
+	i = process_line_tokens(line, lex_head);
+	if (i == -1)
+		return (NULL);
+	if (syntax_error(lex_head))
+		return (NULL);
+	if (envp_filler(lex_head, envp) == -1)
+		return (NULL);
+	base = init_base(pipe_counter(lex_head->next));
+	if (!base)
+		return (NULL);
+	if (lex_head->next)
+		lex_head->next->previous = NULL;
+	lex = red_parser(lex_head->next, base);
+	if (!lex)
+	{
+		free_base(base);
+		return (NULL);
+	}
+	return (base);
+}
 
 // static void	debug_print_str_array(char **arr, const char *name)
 // {
@@ -60,31 +111,3 @@
 // 		i++;
 // 	}
 // }
-
-t_base	*tokenizer(char *line, t_lex *lex, t_env *envp)
-{
-	int		i;
-	t_base	*base;
-
-	if (!envp)
-		return (NULL);
-	i = 0;
-	qoute_error(line);
-	while (line[i])
-	{
-		if (ft_isspace(line[i]))
-			i++;
-		else if (is_limiter(line[i]))
-			i = node_filler(line, i, lex);
-	}
-	syntax_error(lex);
-	envp_filler(lex, envp);
-	base = init_base(pipe_counter(lex->next));
-	if (!base)
-		return (NULL);
-	if (lex->next)
-		lex->next->previous = NULL;
-	lex = red_parser(lex->next, base);
-	//debug_print_base(base);
-	return (base);
-}

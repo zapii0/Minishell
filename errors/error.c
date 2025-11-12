@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/11 17:14:47 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/12 02:06:30 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	qoute_error(char *line)
 
 	i = -1;
 	open = false;
-		limiter = '\0';
+	limiter = '\0';
 	while (line[++i])
 	{
 		if ((line[i] == '"' || line[i] == '\'') && open == false)
@@ -39,7 +39,7 @@ void	qoute_error(char *line)
 	if (open == true && limiter == '\'')
 		error_exec(QUOTE_ERROR, 0);
 	if (open == true && limiter == '\"')
-		error_exec(QUOTE_ERROR, 1);
+		return (error_exec(QUOTE_ERROR, 1));
 	return ;
 }
 
@@ -85,7 +85,7 @@ void	error_red2(t_lex *lex)
 		return (error_exec(RED_ERROR, 1));
 }
 
-void	error_red(t_lex *lex)
+int	error_red(t_lex *lex)
 {
 	while (lex)
 	{
@@ -95,42 +95,45 @@ void	error_red(t_lex *lex)
 			continue;
 		}
 		if (lex->content[0] == '<' && (!lex->next || !lex->next->content))
-			return (error_exec(RED_ERROR, 7));
+			return (error_exec(RED_ERROR, 7), 1);
 		if (lex->content[0] == '>' && (!lex->next || !lex->next->content))
-			return (error_exec(RED_ERROR, 7));
+			return (error_exec(RED_ERROR, 7), 1);
 		if (lex->content[1] && lex->content[0] == '>' && lex->content[1] == '<')
-			return (error_exec(RED_ERROR, 5));
+			return (error_exec(RED_ERROR, 5), 1);
 		if (lex->content[1] && lex->content[0] == '<' && lex->content[1] == '>')
-			return (error_exec(RED_ERROR, 6));
+			return (error_exec(RED_ERROR, 6), 1);
 		if ((lex->content[0] == '<' || lex->content[0] == '>') && \
 			lex->next && lex->next->content &&
 			(lex->next->content[0] == '<' || lex->next->content[0] == '>'))
-			return (error_red2(lex));
+			return (error_red2(lex), 1);
 		lex = lex->next;
 	}
+	return (0);
 }
 
-void	syntax_error(t_lex *lex)
+int	syntax_error(t_lex *lex)
 {
 	if (!lex)
-		return ;
-	error_red(lex);
+		return (1);
+	if (error_red(lex))
+		return (1);
 	while (lex && lex->content == NULL)
 		lex = lex->next;
 	if (!lex)
-		return ;
+		return (1);
 	if (lex->content[0] == '|')
-		return (error_exec(PIPE_ERROR, 0));
+		return (error_exec(PIPE_ERROR, 0), 1);
 	while (lex)
 	{
 		if (lex->content && lex->content[0] == '|')
 		{
 			if (!lex->previous || !lex->next || !lex->next->content)
-				return (error_exec(PIPE_ERROR, 0));
+				return (error_exec(PIPE_ERROR, 0), 1);
 			if ((lex->previous->content && lex->previous->content[0] == '|') ||
 				(lex->next->content && lex->next->content[0] == '|'))
-				return (error_exec(PIPE_ERROR, 0));
+				return (error_exec(PIPE_ERROR, 0), 1);
 		}
 		lex = lex->next;
 	}
+	return (0);
 }

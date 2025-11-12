@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:58:50 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/05 20:20:12 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/12 02:41:17 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,34 @@
 
 void	free_single_data(t_data *data)
 {
-    free_str_array(data->args);
-    free_str_array(data->red_out);
-    free_str_array(data->red_in);
+	if (data->args)
+		free_str_array(data->args);
+	if (data->red_out)
+		free_str_array(data->red_out);
+    if (data->red_in)
+		free_str_array(data->red_in);
+	if (data->heredoc)
+		free(data->heredoc);
+}
+void	clean_all(t_base *base, t_lex *lex)
+{
+	t_lex	*tmp;
+	
+	if (base)
+	{
+		free_base(base);
+	}
+	if (lex)
+	{
+		while (lex)
+		{
+			if (lex->content)
+				free(lex->content);
+			tmp = lex;
+			lex = lex->next;
+			free(tmp);
+		}
+	}
 }
 
 void	free_base(t_base *base)
@@ -61,7 +86,17 @@ static t_lex	*create_node_copy(t_lex *src, t_lex *tail)
 	new = malloc(sizeof(t_lex));
 	if (!new)
 		return (NULL);
-	new->content = src->content;
+	if (src->content)
+	{
+		new->content = ft_strdup(src->content);
+		if (!new->content)
+		{
+			free(new);
+			return (NULL);
+		}
+	}
+	else
+		new->content = NULL;
 	new->type = src->type;
 	new->next = NULL;
 	new->previous = tail;

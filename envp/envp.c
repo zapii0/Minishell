@@ -6,21 +6,24 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:16:43 by mzapora           #+#    #+#             */
-/*   Updated: 2025/10/28 23:18:11 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/12 02:16:34 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
 
-void	envp_filler(t_lex *lex, t_env *envp)
+int	envp_filler(t_lex *lex, t_env *envp)
 {
 	while (lex)
 	{
 		if (lex->content && ft_strchr(lex->content, '$'))
 			lex->content = envp_value_checker(lex->content, envp);
+		if (lex->content == NULL)
+			return (-1);
 		lex = lex->next;
 	}
+	return (0);
 }
 
 char	*envp_value_checker(char *line, t_env *envp)
