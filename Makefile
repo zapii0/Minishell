@@ -6,7 +6,7 @@ CFLAGS      = -Wall -Wextra -Werror
 LIBFT_DIR   = libft
 LIBFT       = $(LIBFT_DIR)/libft.a
 
-PARSING	= tokenizer.c utils.c utils2.c
+PARSING	= tokenizer.c utils.c utils2.c utils3.c
 ERRORS		= error.c
 MAIN		= main.c
 INTIALIZE	= structs.c init.c

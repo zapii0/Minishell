@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/12 02:44:54 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:26:53 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*input_reader(t_env *envp)
 		add_history(buf);
 		lex = list_creator();
 		base = tokenizer(buf, lex, envp);
+		//clean_all(base, lex);
+		//exit (0);
 	}
 	return (buf);
 }

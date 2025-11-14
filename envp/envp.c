@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:16:43 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/12 02:16:34 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:22:12 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	envp_filler(t_lex *lex, t_env *envp)
 		if (lex->content == NULL)
 			return (-1);
 		lex = lex->next;
+		// if (quote_remover(lex))
+		// 	return (-1);
 	}
 	return (0);
 }

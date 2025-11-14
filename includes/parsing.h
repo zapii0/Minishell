@@ -94,4 +94,7 @@ void	fill_redirections(t_lex *lex, t_data *data);
 int	allocate_red_arrays(t_lex *lex, t_data *data);
 void	args_filler(t_lex *lex, t_base *base);
 void	clean_all(t_base *base, t_lex *lex);
+int		quote_remover(t_lex *lex);
+char	*quote_remover_helper(char *str);
+char	*quote_swapper(char *line, char *src);
 #endif
