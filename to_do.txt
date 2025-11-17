@@ -1,0 +1,102 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    to_do.txt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/08/14 14:22:30 by apieniak          #+#    #+#              #
+#    Updated: 2025/10/28 18:04:27 by apieniak         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+Dla mnie: 
+
+- znajdowanie sciezek do plikow i sprawdzanie, czy w ogole istnieje []
+- stworzenie funkcji, ktora tworzy procesy []
+- stworzenie funkcji ktora tworzy child proccess
+- free dla calej stuktury
+- free dla struktury po uzyciu komendy
+
+
+
+PROMPTS:
+- Display a prompt when waiting for a new command (done)
+
+- Have a working history (done)
+
+- Search and launch the right executable (based on the PATH variable or using a
+relative or an absolute path)
+
+- Avoid using more than one global variable to indicate a received signal. Consider
+the implications: this approach ensures that your signal handler will not access your
+main data structures. (done)
+
+- 
+
+SIGNALS:
+ - ctrl + d exit minishell (done)
+ - ctrl + \ do nothing (done)
+ - ctrl + c new prompt on new line (done)
+______________________
+
+PARSING:
+
+Lexer - ?
+
+Parser - ?
+
+Not interpret unclosed quotes or special characters which are not required by the
+subject such as \ (backslash) or ; (semicolon).
+
+Handle ’ (single quote) which should prevent the shell from interpreting the meta-
+characters in the quoted sequence.
+
+Handle " (double quote) which should prevent the shell from interpreting the meta-
+characters in the quoted sequence except for $ (dollar sign).
+_____________________
+
+BUILT-INS:
+- cd ZROBIONE
+- echo with -n (done) ZROBIONE
+- env (done (?)) ZROBIONE
+- exit
+- export ZROBIONE
+- pwd ZROBIONE
+- unset ZROBIONE
+
+
+PWD, EXPORT, UNSET do lekkiej poprawy
+______________________
+
+MAKEFILE: DONE
+
+______________________
+
+Execution
+
+Implement pipes (| character). The output of each command in the pipeline is
+connected to the input of the next command via a pipe.
+
+Handle environment variables ($ followed by a sequence of characters) which
+should expand to their values.
+
+Handle $? which should expand to the exit status of the most recently executed
+foreground pipeline.
+
+Implement redirections:
+◦ < should redirect input.
+
+◦ > should redirect output.
+
+◦ << should be given a delimiter, then read the input until a line containing the
+delimiter is seen. However, it doesn’t have to update the history!
+
+◦ >> should redirect output in append mode.
+
+
+
+
+Michala foldery ERRORS, CLEAN, redirections
+
+
