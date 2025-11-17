@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:07 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/10 22:28:15 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:27:34 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_remove_env(t_env **env, char *env_name)
 
 int	ft_unset(t_env **env, char *env_name)
 {
+	if (!env_name)
+		return (1);
 	if (!ft_find_env(env_name, *env))
 	{
 		printf("minishell: could not find a file with this name");

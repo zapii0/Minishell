@@ -6,14 +6,14 @@
 #    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 16:30:00 by apieniak          #+#    #+#              #
-#    Updated: 2025/11/16 08:58:18 by apieniak         ###   ########.fr        #
+#    Updated: 2025/11/17 21:19:00 by apieniak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = main built-ins built-ins/cd built-ins/exit built-ins/ft_echo built-ins/ft_env \
  built-ins/ft_export built-ins/ft_pwd built-ins/unset utils/utils.c
@@ -64,11 +64,11 @@ $(LIBFT):
 
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME) $(INCLUDE) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(INCLUDE) -lreadline
 
 
 %.o: %.c
-	$(CC) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean

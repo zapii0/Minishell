@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/16 10:10:34 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:19:00 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char	*path_env_valider(t_env *env, char *cmd);
 
 //==============================================================
 
-//redirects/cline_delim.c \
+//redirects/cline_delim.c
 
 void	heredoc_limiter(t_base *base, t_pipes *pipes);
 

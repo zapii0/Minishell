@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:24 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/10 22:30:30 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:19:48 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 
 int	ft_find_env(char *str, t_env *env)
 {
-	int	i;
-
-	i = 0;
 	while (env != NULL)
 	{
 		if (ft_strcmp(str, env->name) == 0)
