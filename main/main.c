@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 18:16:06 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:55:53 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(void)
 	t_env	*env;
 	t_base	*base;
 	char	*line;
+	int		last_exit_status;
 
 	env = initialize_list();
 	base = NULL;
@@ -57,12 +58,12 @@ int	main(void)
 		else if (base)
 		{
 			execution_main(base, &env);
+			last_exit_status = base->exit_status;
 			free(line);
-			free_base(base);
 		}
 		else
 			free(line);
 	}
 	free_end_proccess(base, env);
-	return (0);
+	return (last_exit_status);
 }
