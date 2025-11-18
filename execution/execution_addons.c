@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 14:43:44 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/16 10:10:05 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:23:49 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void	exec_commands(t_base *base, t_env *env, pid_t *pid, t_pipes *pipes)
 			|| !base->data[base->currentIndex].args[0])
 			exit(0);
 		if (is_builtin(base->data[base->currentIndex].args[0]))
-		{
-			printf("TEST\n");
 			exit(start_builtin(base->data[base->currentIndex].args[0], base, &env));
-		}
 		cmd = base->data[base->currentIndex].args[0];
 		exec_vp_paths(base->data[base->currentIndex].args, base->evp, env, cmd);
 		exit(127);

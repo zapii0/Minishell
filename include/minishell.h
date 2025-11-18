@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/17 21:19:00 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:42:33 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
-extern char **__environ;
+//extern char **__environ;
 
 typedef struct s_env
 {
