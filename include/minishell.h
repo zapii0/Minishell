@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:15:44 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,6 @@ void	set_signals(int sig, siginfo_t *info, void *nothing);
 //_____________________________________________________________
 
 // The function which read input from the terminal | main .c
-t_base	*input_reader(t_env *envp, char **line);
+t_base	*input_reader(t_env *envp, char **line, int last_exit);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 14:43:44 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:38:34 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:09:55 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,16 @@ void	exec_vp_paths(char **args, char **envp, t_env *env, char *cmd)
 	path = path_env_valider(env, cmd);
 	if (!path)
 		ft_print_error(args[0], NULL, "Malloc Error", 1);
-	if (access(path, F_OK) == -1 && access(path, X_OK) == -1)
-		ft_print_error(args[0], path, ": No such file or directory", 127);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(path, F_OK) == -1 && access(path, X_OK) == -1)
+			ft_print_error(args[0], path, ": No such file or directory", 127);
+	}
+	else
+	{
+    	if (!path || access(path, F_OK) == -1)
+        	ft_print_error(args[0], cmd, ": command not found", 127);
+	}
 	stat(path, &st);
 	if (execve(path, args, envp) == -1)
 	{

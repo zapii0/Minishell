@@ -6,17 +6,11 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:24 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/17 21:19:48 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:26:35 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-//void	list_add_back(t_env **env, char *env_name, char *env_value)
-//{
-//	if (!env || !env_name || !env_value)
-//		return ;
-//}
 
 int	ft_find_env(char *str, t_env *env)
 {
@@ -35,7 +29,7 @@ void	ft_env_replace(t_env *env, char *name, char *new_value)
 {
 	while (env)
 	{
-		if (strcmp(env->name, name) == 0)
+		if (ft_strcmp(env->name, name) == 0)
 		{
 			free(env->value);
 			env->value = ft_strdup(new_value);

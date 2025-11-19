@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/19 17:36:31 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:05:24 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	process_line_tokens(char *line, t_lex *lex)
 	return (0);
 }
 
-t_base	*tokenizer(char *line, t_lex *lex, t_env *envp)
+t_base	*tokenizer(char *line, t_lex *lex, t_env *envp, int last_exit)
 {
 	int		i;
 	t_base	*base;
@@ -96,10 +96,11 @@ t_base	*tokenizer(char *line, t_lex *lex, t_env *envp)
 		return (NULL);
 	if (syntax_error(lex_head))
 		return (NULL);
-	if (lex_head->next && envp_filler(lex_head->next, envp) == -1)
-		return (NULL);
 	base = init_base(pipe_counter(lex_head->next));
 	if (!base)
+		return (NULL);
+	base->exit_status = last_exit;
+	if (lex_head->next && envp_filler(lex_head->next, envp, base) == -1)
 		return (NULL);
 	if (lex_head->next)
 		lex_head->next->previous = NULL;

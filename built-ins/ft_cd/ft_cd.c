@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:23:22 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/10 22:32:25 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:13:38 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*save_env_value(char *str, t_env *env)
 {
 	while (env != NULL)
 	{
-		if (strcmp(str, env->name) == 0)
+		if (ft_strcmp(str, env->name) == 0)
 			return (env->value);
 		env = env->next;
 	}

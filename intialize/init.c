@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:46:40 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:44:16 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:56:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ t_base	*init_base(int d_counter)
 	while (i < d_counter)
 		init_single_data(&base->data[i++]);
 	base->d_counter = d_counter;
+	base->exit_status = 0;
+	base->pipes_num = 0;
+	base->index = 0;
+	base->evp = NULL;
 	return (base);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:17:32 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/19 17:37:19 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:01:16 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_first(char *line, int i)
 	return (str);
 }
 
-char	*get_second(char *line, int *i, t_env *envp)
+char	*get_second(char *line, int *i, t_env *envp, t_base *base)
 {
 	int		j;
 	int		k;
@@ -54,6 +54,9 @@ char	*get_second(char *line, int *i, t_env *envp)
 	j = 0;
 	k = 0;
 	(*i)++;
+	value = handle_exit_status_exit(line, i, base);
+	if (value)
+		return (value);
 	while (ft_isalnum(line[(*i) + j]) || line[(*i) + j] == '_')
 		j++;
 	name = calloc(j + 1, 1);

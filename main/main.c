@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:43:25 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:04:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_end_proccess(t_base *base, t_env *env)
 	rl_clear_history();
 }
 
-t_base	*input_reader(t_env *envp, char **line)
+t_base	*input_reader(t_env *envp, char **line, int last_exit)
 {
 	t_lex	*lex;
 	t_base	*base;
@@ -33,7 +33,7 @@ t_base	*input_reader(t_env *envp, char **line)
 	{
 		add_history(*line);
 		lex = list_creator();
-		base = tokenizer(*line, lex, envp);
+		base = tokenizer(*line, lex, envp, last_exit);
 		return (base);
 	}
 	return (NULL);
@@ -52,11 +52,12 @@ int	main(void)
 	gather_signal();
 	while (TRUE)
 	{
-		base = input_reader(env, &line);
+		base = input_reader(env, &line, last_exit_status);
 		if (!line)
 			break ;
 		else if (base)
 		{
+			base->exit_status = last_exit_status;
 			execution_main(base, &env);
 			last_exit_status = base->exit_status;
 			free_base(base);
