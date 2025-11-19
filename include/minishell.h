@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 18:42:33 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:24:25 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,14 @@ void	ft_env_replace(t_env *env, char *name, char *new_value);
 void	ft_env_add_back(t_env **env, char *name, char *value);
 
 int		ft_export(t_env **env, char *new_envar, char *new_value);
+
+int		ft_exit(t_base *base, t_env *env);
+
+void	free_string_array(char **arr);
+
+void	clear_data_element(t_data *data);
+
+void	clear_all_allocated(t_base *base);
 
 int		ft_echo(t_base *base);
 

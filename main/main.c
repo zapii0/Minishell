@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 18:55:53 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:57:09 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(void)
 		{
 			execution_main(base, &env);
 			last_exit_status = base->exit_status;
+			free_base(base);
 			free(line);
 		}
 		else

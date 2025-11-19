@@ -6,7 +6,7 @@
 #    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 16:30:00 by apieniak          #+#    #+#              #
-#    Updated: 2025/11/17 21:19:00 by apieniak         ###   ########.fr        #
+#    Updated: 2025/11/19 17:25:12 by apieniak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ SRC = \
 	built-ins/ft_echo/ft_echo.c \
 	built-ins/builtins.c \
 	built-ins/ft_cd/ft_cd.c \
+	built-ins/ft_exit/ft_exit.c \
 	built-ins/ft_unset/ft_unset.c \
+	built-ins/ft_exit/ft_clear_allocated.c \
 	intialize/list_utils.c \
 	execution/execution_addons.c \
 	execution/execution_utils.c \
