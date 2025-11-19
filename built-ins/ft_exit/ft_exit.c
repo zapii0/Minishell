@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:23:08 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:26:12 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:15 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,22 @@ int	ft_exit(t_base *base, t_env *env)
 	int	exit_status;
 
 	ft_putendl_fd("exit", 1);
-	if (!base->data[base->currentIndex].args[1])
+	if (!base->data[base->index].args[1])
 	{
 		commit_exit(base, env);
 		exit(0);
 	}
-	if (is_arg_numeric(base->data[base->currentIndex].args[1]))
+	if (is_arg_numeric(base->data[base->index].args[1]))
 	{
 		commit_exit(base, env);
 		exit (2);
 	}
-	if (base->data[base->currentIndex].args[2])
+	if (base->data[base->index].args[2])
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
 		return (1);
 	}
-	exit_status = exit_code(base->data[base->currentIndex].args[1]);
+	exit_status = exit_code(base->data[base->index].args[1]);
 	commit_exit(base, env);
 	exit(exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:16:43 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/16 08:52:46 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:38:00 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ int	envp_filler(t_lex *lex, t_env *envp)
 		if (lex->content == NULL)
 			return (-1);
 		lex = lex->next;
-		// if (quote_remover(lex)
-		// 	return (-1);
 	}
 	return (0);
 }
 
 char	*envp_value_checker(char *line, t_env *envp)
 {
-	int 	i;
+	int		i;
 	bool	single_q;
 	bool	double_q;
-	
+
 	i = 0;
 	single_q = false;
 	double_q = false;

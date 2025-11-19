@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:23:12 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/17 20:33:37 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_env(t_base *base, t_env *env)
 {
-	if (base->data[base->currentIndex].args[1])
+	if (base->data[base->index].args[1])
 	{
 		printf("env: too many arguments\n");
 		return (1);

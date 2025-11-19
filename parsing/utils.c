@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:48:54 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:45:28 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:36:44 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	quote_edge_case(char *line, int i, t_lex *lex)
 int	node_filler(char *line, int i, t_lex *lex)
 {
 	int	j;
-	
+
 	j = 0;
 	if (line[i] == '|' || line[i] == '<' || line[i] == '>')
 		return (special_chars(line, i, lex));

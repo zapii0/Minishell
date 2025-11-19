@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:17:32 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/11 15:19:18 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:37:19 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*get_third(char *line, int i)
 char	*find_env_value(char *name, t_env *envp)
 {
 	char	*value;
-	
+
 	while (envp)
 	{
 		if (!ft_strcmp(name, envp->name))

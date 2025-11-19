@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 16:55:42 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 17:51:29 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	heredoc_limiter(t_base *base, t_pipes *pipes)
 	while (TRUE)
 	{
 		str = readline("heredoc> ");
-		if (str && ft_strcmp(base->data[base->currentIndex].heredoc, str) == 0)
+		if (str && ft_strcmp(base->data[base->index].heredoc, str) == 0)
 		{
 			free(str);
 			break ;

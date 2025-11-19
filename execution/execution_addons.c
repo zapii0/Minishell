@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 14:43:44 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 18:23:49 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:38:34 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,17 @@ void	exec_vp_paths(char **args, char **envp, t_env *env, char *cmd)
 void	exec_commands(t_base *base, t_env *env, pid_t *pid, t_pipes *pipes)
 {
 	char	*cmd;
-	if (pid[base->currentIndex] == 0)
+
+	if (pid[base->index] == 0)
 	{
 		redirects(base, pipes);
-		if (!base->data[base->currentIndex].args
-			|| !base->data[base->currentIndex].args[0])
+		if (!base->data[base->index].args
+			|| !base->data[base->index].args[0])
 			exit(0);
-		if (is_builtin(base->data[base->currentIndex].args[0]))
-			exit(start_builtin(base->data[base->currentIndex].args[0], base, &env));
-		cmd = base->data[base->currentIndex].args[0];
-		exec_vp_paths(base->data[base->currentIndex].args, base->evp, env, cmd);
+		if (is_builtin(base->data[base->index].args[0]))
+			exit(start_builtin(base->data[base->index].args[0], base, &env));
+		cmd = base->data[base->index].args[0];
+		exec_vp_paths(base->data[base->index].args, base->evp, env, cmd);
 		exit(127);
 	}
 	else
@@ -86,7 +87,7 @@ void	redirects(t_base *base, t_pipes *pipes)
 	t_data	*d;
 	int		res;
 
-	d = &base->data[base->currentIndex];
+	d = &base->data[base->index];
 	res = handle_input_redir(d, pipes);
 	if (res != 0)
 	{

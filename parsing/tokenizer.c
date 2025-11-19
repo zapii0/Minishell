@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/18 18:25:18 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:36:31 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ t_base	*tokenizer(char *line, t_lex *lex, t_env *envp)
 	lex = red_parser(lex_head->next, base);
 	if (!lex)
 		return (free_base(base), NULL);
-	//debug_print_base(base);
 	clean_all(NULL, lex_head);
 	clean_all(NULL, lex);
 	return (base);

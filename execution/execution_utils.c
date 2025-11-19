@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:27:58 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/16 10:09:38 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	handle_output_redir(t_data *d, t_pipes *pipes, t_base *base)
 		close(fd);
 		return (0);
 	}
-	if (base->currentIndex < base->pipes_num)
+	if (base->index < base->pipes_num)
 	{
 		dup2(pipes->pfd[1], STDOUT_FILENO);
 		close(pipes->pfd[1]);

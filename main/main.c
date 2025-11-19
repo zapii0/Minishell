@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 16:57:09 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:43:25 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	main(void)
 	char	*line;
 	int		last_exit_status;
 
+	last_exit_status = 0;
 	env = initialize_list();
 	base = NULL;
-	rl_catch_signals = 0;
 	gather_signal();
 	while (TRUE)
 	{

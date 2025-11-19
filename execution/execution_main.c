@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:00 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/17 20:39:52 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:38:56 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,20 @@ int	process_wait(pid_t *pid, int pipes)
 
 int	start_execution(t_base *base, t_env **env, pid_t *pid, t_pipes *pipes)
 {
-	if (base->pipes_num <= 1 && (base->data[base->currentIndex].args[0] && child_builtins(base->data[base->currentIndex].args[0])))
+	if (base->pipes_num <= 1 && (base->data[base->index].args[0] && child_builtins(base->data[base->index].args[0])))
 	{
-		base->exit_status = start_builtin(base->data[base->currentIndex].args[0], base, env);
-		printf("\n WESZŁO JAPIDIDI \n");
+		base->exit_status = start_builtin(base->data[base->index].args[0], base, env);
 		return (0);
 	}
-	if (base->data[base->currentIndex].heredoc)
+	if (base->data[base->index].heredoc)
 		heredoc_limiter(base, pipes);
 	if (pipe(pipes->pfd) == -1)
 	{
 		perror("");
 		return (1);
 	}
-	pid[base->currentIndex] = fork();
-	if (pid[base->currentIndex] == -1)
+	pid[base->index] = fork();
+	if (pid[base->index] == -1)
 	{
 		perror("");
 		close(pipes->pfd[0]);
@@ -78,7 +77,7 @@ void	execution_main(t_base *base, t_env **env)
 	i = 0;
 	while (i <= base->pipes_num)
 	{
-		base->currentIndex = i;
+		base->index = i;
 		if (start_execution(base, env, pid, &pipes) != 0)
 		{
 			free(pid);
@@ -89,8 +88,7 @@ void	execution_main(t_base *base, t_env **env)
 	}
 	if (!(base->pipes_num < 1 && child_builtins(base->data[0].args[0])))
 		base->exit_status = process_wait(pid, base->pipes_num);
-	//clear_cmds(base);
-	base->currentIndex = 0;
+	base->index = 0;
 	free(pid);
 	if (base->evp)
 	{

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:47:29 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:05:36 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	start_builtin(char *cmd, t_base *base, t_env **env)
 	else if (ft_strcmp(cmd, "unset") == 0)
 		return (ft_unset(env, base->data->args[1]));
 	ft_putstr_fd("command not found: ", 2);
-	ft_putstr_fd(base->data[base->currentIndex].args[0], 2);
+	ft_putstr_fd(base->data[base->index].args[0], 2);
 	ft_putstr_fd("\n", 2);
 	return (127);
 }

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:24:25 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_base
 	int		d_counter; // Ilosc mniejszych czesci
 	int		exit_status; // exit status programu
 	int		pipes_num; // number of pipes in input
-	int		currentIndex; // execution index
+	int		index; // execution index
 	char	**evp; // Lista wszystkich env
 }	t_base;
 

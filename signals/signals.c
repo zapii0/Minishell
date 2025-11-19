@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:22:54 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/10 22:37:19 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:40:30 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	gather_signal(void)
 {
 	struct sigaction	sig_act;
 
+	rl_catch_signals = 0;
 	sigemptyset(&sig_act.sa_mask);
 	sig_act.sa_sigaction = set_signals;
 	sig_act.sa_flags = SA_SIGINFO;
