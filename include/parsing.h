@@ -25,6 +25,7 @@ typedef struct s_lex
 {
 	char			*content;
 	enum types		type;
+	bool			quoted;
 	struct s_lex	*next;
 	struct s_lex	*previous;
 }	t_lex;

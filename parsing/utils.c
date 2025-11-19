@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:48:54 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/19 17:36:44 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:18:11 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	quote_edge_case(char *line, int i, t_lex *lex)
 	lex = node_creator(lex);
 	if (!lex)
 		return (-1);
+	lex->quoted = true;
 	lex->content = calloc(j + 1, sizeof(char));
 	if (!lex->content)
 		return (-1);
@@ -70,6 +71,8 @@ int	node_filler(char *line, int i, t_lex *lex)
 	int	j;
 
 	j = 0;
+	if (line[i + j] == 39 || line[i + j] == '"')
+		return (quote_edge_case(line, i, lex));
 	if (line[i] == '|' || line[i] == '<' || line[i] == '>')
 		return (special_chars(line, i, lex));
 	while (line[i + j] && !is_delimiter(line[i + j]))

@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 00:58:50 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:42:23 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:06:55 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static t_lex	*create_node_copy(t_lex *src, t_lex *tail)
 	else
 		new->content = NULL;
 	new->type = src->type;
+	new->quoted = src->quoted;
 	new->next = NULL;
 	new->previous = tail;
 	return (new);
@@ -123,7 +124,7 @@ t_lex	*clean_redirects(t_lex *lex)
 	tail = NULL;
 	while (lex)
 	{
-		if (is_redirect_op(lex->content))
+		if (!lex->quoted && is_redirect_op(lex->content))
 		{
 			lex = lex->next;
 			if (lex)

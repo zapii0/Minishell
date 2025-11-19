@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 21:11:21 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/18 18:49:06 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:08:18 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,12 @@ char	*path_env_valider(t_env *env, char *cmd)
 	int		i;
 
 	i = 0;
+	if (!save_env_value("PATH", env))
+		return (ft_strdup(cmd));
 	path = ft_split(save_env_value("PATH", env), ':');
 	temp_val = ft_strjoin("/", cmd);
 	if (!path)
-		return (NULL);
+		return (free(temp_val), ft_strdup(cmd));
 	while (path[i])
 	{
 		final_path = ft_strjoin(path[i], temp_val);

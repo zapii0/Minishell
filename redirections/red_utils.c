@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:38:50 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/11 15:19:37 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:12:51 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ void	search_append(t_lex *lex, t_base *base)
 	while (lex && data_counter < base->d_counter)
 	{
 		append = false;
-		while (lex && lex->content && ft_strcmp("|", lex->content))
+		while (lex && lex->content
+			&& (lex->quoted || ft_strcmp("|", lex->content)))
 		{
-			if (!ft_strcmp(">>", lex->content))
+			if (!lex->quoted && !ft_strcmp(">>", lex->content))
 				append = true;
-			if (!ft_strcmp(">", lex->content))
+			if (!lex->quoted && !ft_strcmp(">", lex->content))
 				append = false;
 			lex = lex->next;
 		}
 		base->data[data_counter].append = append;
-		if (lex && lex->content && !ft_strcmp("|", lex->content))
+		if (lex && lex->content && !lex->quoted
+			&& !ft_strcmp("|", lex->content))
 			lex = lex->next;
 		data_counter++;
 	}

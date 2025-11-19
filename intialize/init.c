@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 17:46:40 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/19 18:56:20 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:08:47 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	pipe_counter(t_lex *lex)
 	p_counter = 0;
 	while (lex)
 	{
-		if (lex->content && (!ft_strcmp("|", lex->content)))
+		if (lex->content && !lex->quoted && (!ft_strcmp("|", lex->content)))
 			p_counter++;
 		lex = lex->next;
 	}

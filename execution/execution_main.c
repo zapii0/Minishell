@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:00 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:38:56 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:14:42 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	process_wait(pid_t *pid, int pipes)
 
 int	start_execution(t_base *base, t_env **env, pid_t *pid, t_pipes *pipes)
 {
-	if (base->pipes_num <= 1 && (base->data[base->index].args[0] && child_builtins(base->data[base->index].args[0])))
+	if (base->pipes_num <= 1 && (base->data[base->index].args[0]
+			&& child_builtins(base->data[base->index].args[0])))
 	{
 		base->exit_status = start_builtin(base->data[base->index].args[0], base, env);
 		return (0);

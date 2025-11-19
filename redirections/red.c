@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:17:10 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:46:47 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:14:17 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ t_lex	*red_parser(t_lex *lex, t_base *base)
 	while (lex && current_data < base->d_counter)
 	{
 		start = lex;
-		while (lex && lex->content && (ft_strcmp("|", lex->content)))
+		while (lex && lex->content && (lex->quoted
+				|| ft_strcmp("|", lex->content)))
 			lex = lex->next;
 		if (!allocate_red_arrays(start, &base->data[current_data]))
 			return (NULL);
 		fill_redirections(start, &base->data[current_data]);
-		if (lex && lex->content && !ft_strcmp("|", lex->content))
+		if (lex && lex->content && !lex->quoted
+			&& !ft_strcmp("|", lex->content))
 			lex = lex->next;
 		current_data++;
 	}
@@ -47,7 +49,7 @@ static int	count_tok(t_lex *lex)
 
 	i = 0;
 	tmp = lex;
-	while (tmp && tmp->content && ft_strcmp("|", tmp->content))
+	while (tmp && tmp->content && (tmp->quoted || ft_strcmp("|", tmp->content)))
 	{
 		i++;
 		tmp = tmp->next;
@@ -76,7 +78,8 @@ void	args_filler(t_lex *lex, t_base *base)
 			lex = lex->next;
 		}
 		base->data[seg].args[j] = NULL;
-		if (lex && lex->content && !ft_strcmp("|", lex->content))
+		if (lex && lex->content && !lex->quoted
+			&& !ft_strcmp("|", lex->content))
 			lex = lex->next;
 		seg++;
 	}
@@ -90,9 +93,9 @@ char	*find_heredoc_limiter(t_lex *lex, bool *use_heredoc)
 	limiter = NULL;
 	*use_heredoc = false;
 	tmp = lex;
-	while (tmp && tmp->content && ft_strcmp("|", tmp->content))
+	while (tmp && tmp->content && (tmp->quoted || ft_strcmp("|", tmp->content)))
 	{
-		if (!ft_strcmp("<<", tmp->content))
+		if (!tmp->quoted && !ft_strcmp("<<", tmp->content))
 		{
 			if (limiter)
 				free(limiter);
@@ -100,7 +103,7 @@ char	*find_heredoc_limiter(t_lex *lex, bool *use_heredoc)
 				limiter = ft_strdup(tmp->next->content);
 			*use_heredoc = true;
 		}
-		if (!ft_strcmp("<", tmp->content))
+		if (!tmp->quoted && !ft_strcmp("<", tmp->content))
 			*use_heredoc = false;
 		tmp = tmp->next;
 	}
@@ -119,9 +122,11 @@ void	search_heredoc(t_lex *lex, t_base *base)
 		limiter = find_heredoc_limiter(lex, &use_heredoc);
 		base->data[data_count].heredoc = limiter;
 		base->data[data_count].b_heredoc = use_heredoc;
-		while (lex && lex->content && ft_strcmp("|", lex->content))
+		while (lex && lex->content && (lex->quoted
+				|| ft_strcmp("|", lex->content)))
 			lex = lex->next;
-		if (lex && lex->content && !ft_strcmp("|", lex->content))
+		if (lex && lex->content && !lex->quoted
+			&& !ft_strcmp("|", lex->content))
 			lex = lex->next;
 		data_count++;
 	}
@@ -134,19 +139,19 @@ void	fill_redirections(t_lex *lex, t_data *data)
 
 	index_in = 0;
 	index_out = 0;
-	while (lex && lex->content && ft_strcmp("|", lex->content))
+	while (lex && lex->content && (lex->quoted || ft_strcmp("|", lex->content)))
 	{
-		if (is_in_red(lex->content))
+		if (!lex->quoted && is_in_red(lex->content))
 		{
 			lex = lex->next;
-			data->red_in[index_in] = ft_strdup(lex->content);
-			index_in++;
+			if (lex && lex->content)
+				data->red_in[index_in++] = ft_strdup(lex->content);
 		}
-		else if (is_out_red(lex->content))
+		else if (!lex->quoted && is_out_red(lex->content))
 		{
 			lex = lex->next;
-			data->red_out[index_out] = ft_strdup(lex->content);
-			index_out++;
+			if (lex && lex->content)
+				data->red_out[index_out++] = ft_strdup(lex->content);
 		}
 		else
 			lex = lex->next;

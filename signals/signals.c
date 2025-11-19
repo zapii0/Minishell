@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:22:54 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:40:30 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:09:02 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ void	set_signals(int sig, siginfo_t *info, void *nothing)
 	}
 }
 
+void	set_signals_exec(int sig, siginfo_t *info, void *nothing)
+{
+	(void)nothing;
+	(void)info;
+	if (sig == SIGQUIT)
+	{
+		printf("Quit (core dumped)\n");
+		rl_on_new_line();
+		return ;
+	}
+	else if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+	}
+}
+
 void	gather_signal(void)
 {
 	struct sigaction	sig_act;
@@ -34,6 +51,18 @@ void	gather_signal(void)
 	rl_catch_signals = 0;
 	sigemptyset(&sig_act.sa_mask);
 	sig_act.sa_sigaction = set_signals;
+	sig_act.sa_flags = SA_SIGINFO;
+	sigaction(SIGQUIT, &sig_act, NULL);
+	sigaction(SIGINT, &sig_act, NULL);
+}
+
+void	gather_signal_exec(void)
+{
+	struct sigaction	sig_act;
+
+	rl_catch_signals = 0;
+	sigemptyset(&sig_act.sa_mask);
+	sig_act.sa_sigaction = set_signals_exec;
 	sig_act.sa_flags = SA_SIGINFO;
 	sigaction(SIGQUIT, &sig_act, NULL);
 	sigaction(SIGINT, &sig_act, NULL);

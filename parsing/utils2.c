@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 06:38:17 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:51:54 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:17:55 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_lex	*list_creator(void)
 	if (!lex)
 		return (NULL);
 	lex->content = NULL;
+	lex->quoted = false;
 	lex->next = NULL;
 	return (lex);
 }
@@ -54,6 +55,7 @@ t_lex	*node_creator(t_lex *lex)
 	if (!new)
 		return (NULL);
 	new->content = NULL;
+	new->quoted = false;
 	new->next = NULL;
 	new->previous = lex;
 	while (lex->next)

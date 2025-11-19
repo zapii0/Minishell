@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 19:15:44 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:01:02 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 # include <string.h>
 # include <stdbool.h>
 # include <fcntl.h>
-
-//extern char **__environ;
 
 typedef struct s_env
 {
@@ -214,8 +212,12 @@ char	*check_valid_path(const char *dir_name, const char *file_name);
 
 // The function where sigaction is structed, and started | signals.c
 void	gather_signal(void);
+
+void	gather_signal_exec(void);
 // The function which handles signals | signals.c
 void	set_signals(int sig, siginfo_t *info, void *nothing);
+
+void	set_signals_exec(int sig, siginfo_t *info, void *nothing);
 
 //_____________________________________________________________
 

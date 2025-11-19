@@ -6,7 +6,7 @@
 /*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 19:04:20 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:53:18 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int	main(void)
 			break ;
 		else if (base)
 		{
+			gather_signal_exec();
 			base->exit_status = last_exit_status;
 			execution_main(base, &env);
+			gather_signal();
 			last_exit_status = base->exit_status;
 			free_base(base);
 			free(line);
