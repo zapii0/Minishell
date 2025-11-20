@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:22:00 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/20 00:14:42 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:53:38 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ int	start_execution(t_base *base, t_env **env, pid_t *pid, t_pipes *pipes)
 	if (base->pipes_num <= 1 && (base->data[base->index].args[0]
 			&& child_builtins(base->data[base->index].args[0])))
 	{
-		base->exit_status = start_builtin(base->data[base->index].args[0], base, env);
+		base->exit_status = start_builtin(
+				base->data[base->index].args[0], base, env);
 		return (0);
 	}
 	if (base->data[base->index].heredoc)
 		heredoc_limiter(base, pipes);
 	if (pipe(pipes->pfd) == -1)
-	{
-		perror("");
-		return (1);
-	}
+		return (perror(""), 1);
 	pid[base->index] = fork();
 	if (pid[base->index] == -1)
 	{
@@ -63,18 +61,28 @@ int	start_execution(t_base *base, t_env **env, pid_t *pid, t_pipes *pipes)
 	return (0);
 }
 
-void	execution_main(t_base *base, t_env **env)
+void	clean_evp(t_base *base)
 {
-	pid_t	*pid;
-	t_pipes	pipes;
-	int		i;
+	int	i;
 
-	base->pipes_num = base->d_counter - 1;
-	ft_memset(&pipes, 0, sizeof(t_pipes));
-	base->evp = list_to_arr(*env);
-	pid = ft_calloc(base->pipes_num + 1, sizeof(pid_t));
-	if (!pid)
-		return ;
+	i = 0;
+	if (base->evp)
+	{
+		i = 0;
+		while (base->evp[i])
+		{
+			free(base->evp[i]);
+			i++;
+		}
+		free(base->evp);
+		base->evp = NULL;
+	}
+}
+
+void	start_proccess(t_base *base, t_env **env, pid_t *pid, t_pipes pipes)
+{
+	int	i;
+
 	i = 0;
 	while (i <= base->pipes_num)
 	{
@@ -87,19 +95,26 @@ void	execution_main(t_base *base, t_env **env)
 		}
 		i++;
 	}
+}
+
+void	execution_main(t_base *base, t_env **env)
+{
+	pid_t	*pid;
+	t_pipes	pipes;
+
+	base->pipes_num = base->d_counter - 1;
+	ft_memset(&pipes, 0, sizeof(t_pipes));
+	base->evp = list_to_arr(*env);
+	if (base->pipes_num < 1 && base->data[0].args[0]
+		&& ft_strcmp(base->data[0].args[0], "exit") == 0)
+		start_builtin("exit", base, env);
+	pid = ft_calloc(base->pipes_num + 1, sizeof(pid_t));
+	if (!pid)
+		return ;
+	start_proccess(base, env, pid, pipes);
 	if (!(base->pipes_num < 1 && child_builtins(base->data[0].args[0])))
 		base->exit_status = process_wait(pid, base->pipes_num);
 	base->index = 0;
 	free(pid);
-	if (base->evp)
-	{
-		i = 0;
-		while (base->evp[i])
-		{
-			free(base->evp[i]);
-			i++;
-		}
-		free(base->evp);
-		base->evp = NULL;
-	}
+	clean_evp(base);
 }

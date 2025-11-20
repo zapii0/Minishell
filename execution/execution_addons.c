@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_addons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 14:43:44 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/20 00:08:02 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:17:20 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ int	child_builtins(char *builtin)
 	return (0);
 }
 
-void	ft_print_error(char *cmd, char *path, char *mess, int exit_status)
+static void	check_path_access(char **args, char *path, char *cmd)
 {
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(mess, 2);
-	if (path)
-		free(path);
-	exit(exit_status);
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(path, F_OK) == -1 && access(path, X_OK) == -1)
+			ft_print_error(args[0], path, ": No such file or directory", 127);
+	}
+	else if (!path || access(path, F_OK) == -1)
+		ft_print_error(args[0], cmd, ": command not found", 127);
 }
 
 void	exec_vp_paths(char **args, char **envp, t_env *env, char *cmd)
@@ -46,16 +48,7 @@ void	exec_vp_paths(char **args, char **envp, t_env *env, char *cmd)
 	path = path_env_valider(env, cmd);
 	if (!path)
 		ft_print_error(args[0], cmd, ": command not found", 127);
-	if (ft_strchr(cmd, '/'))
-	{
-		if (access(path, F_OK) == -1 && access(path, X_OK) == -1)
-			ft_print_error(args[0], path, ": No such file or directory", 127);
-	}
-	else
-	{
-		if (!path || access(path, F_OK) == -1)
-			ft_print_error(args[0], cmd, ": command not found", 127);
-	}
+	check_path_access(args, path, cmd);
 	stat(path, &st);
 	if (execve(path, args, envp) == -1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:04:48 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/20 00:01:02 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:26:46 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,10 @@ void	close_pipe_fds(t_pipes *pipes);
 
 //main function of execution
 void	execution_main(t_base *base, t_env **env);
+
+void	start_proccess(t_base *base, t_env **env, pid_t *pid, t_pipes pipes);
+
+void	clean_evp(t_base *base);
 
 //==============================================================
 

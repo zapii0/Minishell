@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+         #
+#    By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 16:30:00 by apieniak          #+#    #+#              #
-#    Updated: 2025/11/19 17:25:12 by apieniak         ###   ########.fr        #
+#    Updated: 2025/11/20 14:31:51 by apieniak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC = \
 	redirections/red.c \
 	redirections/red_utils.c \
 	clean/clean_structs.c \
+	clean/clean_structs_2.c 
 	
 
 

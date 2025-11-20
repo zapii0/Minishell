@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 14:23:17 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 23:40:07 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:36:03 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ int	ft_echo(t_base *base)
 	int	argc;
 
 	argc = count_args(base->data->args);
-	if (ft_strcmp(base->data->args[0], "echo") != 0)
-	{
-		printf("%s: command not found\n", base->data->args[1]);
-		return (1);
-	}
 	if (input_check(argc))
 		return (1);
 	if (argc > 1 && ft_strcmp(base->data->args[1], "-n") == 0)

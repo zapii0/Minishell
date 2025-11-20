@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:27:58 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/19 17:33:20 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:33:45 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ int	handle_input_redir(t_data *d, t_pipes *pipes)
 			return (1);
 		}
 		dup2(fd, STDIN_FILENO);
-		close(fd);
-		return (0);
+		return (close(fd), 0);
 	}
 	if (pipes->old_pfd > 0)
 	{
 		dup2(pipes->old_pfd, STDIN_FILENO);
-		close(pipes->old_pfd);
-		return (0);
+		return (close(pipes->old_pfd), 0);
 	}
 	return (0);
 }
@@ -62,14 +60,12 @@ int	handle_output_redir(t_data *d, t_pipes *pipes, t_base *base)
 			return (1);
 		}
 		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		return (0);
+		return (close(fd), 0);
 	}
 	if (base->index < base->pipes_num)
 	{
 		dup2(pipes->pfd[1], STDOUT_FILENO);
-		close(pipes->pfd[1]);
-		return (0);
+		return (close(pipes->pfd[1]), 0);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:26:33 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/20 14:06:32 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:48:09 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ t_base	*input_reader(t_env *envp, char **line, int last_exit)
 	return (NULL);
 }
 
+void	exec_proccess(t_base *base, t_env *env, int *e_status, char *line)
+{
+	gather_signal_exec();
+	base->exit_status = *e_status;
+	execution_main(base, &env);
+	gather_signal();
+	*e_status = base->exit_status;
+	free_base(base);
+	free(line);
+}
+
 int	main(void)
 {
 	t_env	*env;
@@ -56,15 +67,7 @@ int	main(void)
 		if (!line)
 			break ;
 		else if (base)
-		{
-			gather_signal_exec();
-			base->exit_status = last_exit_status;
-			execution_main(base, &env);
-			gather_signal();
-			last_exit_status = base->exit_status;
-			free_base(base);
-			free(line);
-		}
+			exec_proccess(base, env, &last_exit_status, line);
 		else
 			free(line);
 	}

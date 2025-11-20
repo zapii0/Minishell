@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/20 12:52:36 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:30:07 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	error_red(t_lex *lex)
 			return (error_exec(RED_ERROR, 5), 1);
 		if (lex->content[1] && lex->content[0] == '<' && lex->content[1] == '>')
 			return (error_exec(RED_ERROR, 6), 1);
-		if ((lex->content[0] == '<' || lex->content[0] == '>') && \
-			lex->next && lex->next->content
+		if ((lex->content[0] == '<' || lex->content[0] == '>')
+			&& lex->next && lex->next->content
 			&& (lex->next->content[0] == '<' || lex->next->content[0] == '>'))
 			return (error_red2(lex), 1);
 		lex = lex->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:35:59 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/10 22:05:41 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:16:39 by apieniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ char	**list_to_arr(t_env *env)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+void	ft_print_error(char *cmd, char *path, char *mess, int exit_status)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(mess, 2);
+	if (path)
+		free(path);
+	exit(exit_status);
 }
 
 void	print_env_arr(t_base *base)
