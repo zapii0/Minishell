@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 03:26:30 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/20 12:42:51 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/20 12:55:32 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,5 @@ t_base	*tokenizer(char *line, t_lex *lex, t_env *envp, int last_exit)
 	lex = red_parser(lex_head->next, base);
 	if (!lex)
 		return (clean_all(base, lex_head), NULL);
-	clean_all(NULL, lex_head);
-	clean_all(NULL, lex);
-	return (base);
+	return (clean_all(NULL, lex_head), clean_all(NULL, lex), base);
 }

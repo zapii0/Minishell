@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:17:10 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/20 12:47:07 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/20 12:51:09 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,3 @@ void	search_heredoc(t_lex *lex, t_base *base)
 		data_count++;
 	}
 }
-

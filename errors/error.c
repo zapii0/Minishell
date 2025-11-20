@@ -6,7 +6,7 @@
 /*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/20 12:34:32 by mzapora          ###   ########.fr       */
+/*   Updated: 2025/11/20 12:52:36 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	qoute_error(char *line)
 		error_exec(QUOTE_ERROR, 0);
 	if (open == true && limiter == '\"')
 		return (error_exec(QUOTE_ERROR, 1), 1);
-	return 0;
+	return (0);
 }
 
 void	error_exec(int error_code, int mess_code)
