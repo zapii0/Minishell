@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:48:54 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/19 23:18:11 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:22:42 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/parsing.h"
 
-static int	get_quote_span(char *line, int i)
+static int	get_quote_span(char *line, int i, int lim)
 {
-	char	lim;
 	int		count;
 	int		j;
 	int		flag;
 
-	lim = 0;
 	count = 0;
 	j = 0;
 	flag = 0;
@@ -48,7 +46,7 @@ int	quote_edge_case(char *line, int i, t_lex *lex)
 	int		j;
 	int		k;
 
-	j = get_quote_span(line, i);
+	j = get_quote_span(line, i, 0);
 	lex = node_creator(lex);
 	if (!lex)
 		return (-1);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:01:24 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/17 20:39:22 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:34:32 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/parsing.h"
 
-void	qoute_error(char *line)
+int	qoute_error(char *line)
 {
 	int		i;
 	char	limiter;
@@ -38,8 +38,8 @@ void	qoute_error(char *line)
 	if (open == true && limiter == '\'')
 		error_exec(QUOTE_ERROR, 0);
 	if (open == true && limiter == '\"')
-		return (error_exec(QUOTE_ERROR, 1));
-	return ;
+		return (error_exec(QUOTE_ERROR, 1), 1);
+	return 0;
 }
 
 void	error_exec(int error_code, int mess_code)

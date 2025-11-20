@@ -41,7 +41,7 @@ int		quote_edge_case(char *line, int i, t_lex *lex);
 t_lex	*node_creator(t_lex *lex);
 int		special_chars(char *line, int i, t_lex *lex);
 void	error_exec(int error_code, int mess_code);
-void	qoute_error(char *line);
+int		qoute_error(char *line);
 int		syntax_error(t_lex *lex);
 int		error_red(t_lex *lex);
 void	error_red2(t_lex *lex);

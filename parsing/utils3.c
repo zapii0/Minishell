@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:16:06 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/16 08:54:54 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:30:00 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/parsing.h"
+
+static void	process_char(char *line, char src_char, char *limiter, int *j);
+static int	count_unquoted_len(char *str, int i);
 
 int	quote_remover(t_lex *lex)
 {
@@ -35,12 +38,22 @@ int	quote_remover(t_lex *lex)
 char	*quote_remover_helper(char *str)
 {
 	char	*line;
+	int		len;
+
+	len = count_unquoted_len(str, 0);
+	line = calloc(len + 1, 1);
+	if (!line)
+		return (NULL);
+	line = quote_swapper(line, str);
+	return (line);
+}
+
+static int	count_unquoted_len(char *str, int i)
+{
 	char	limiter;
-	int		i;
 	int		j;
 
 	limiter = '\0';
-	i = 0;
 	j = 0;
 	while (str[i])
 	{
@@ -60,11 +73,7 @@ char	*quote_remover_helper(char *str)
 			i++;
 		}
 	}
-	line = calloc(j + 1, 1);
-	if (!line)
-		return (NULL);
-	line = quote_swapper(line, str);
-	return (line);
+	return (j);
 }
 
 char	*quote_swapper(char *line, char *src)
@@ -78,22 +87,21 @@ char	*quote_swapper(char *line, char *src)
 	j = 0;
 	while (src[i])
 	{
-		if (limiter == src[i])
-		{
-			limiter = '\0';
-			i++;
-		}
-		else if (limiter == '\0' && (src[i] == '\'' || src[i] == '"'))
-		{
-			limiter = src[i];
-			i++;
-		}
-		else
-		{
-			line[j] = src[i];
-			i++;
-			j++;
-		}
+		process_char(line, src[i], &limiter, &j);
+		i++;
 	}
 	return (line);
+}
+
+static void	process_char(char *line, char src_char, char *limiter, int *j)
+{
+	if (*limiter == src_char)
+		*limiter = '\0';
+	else if (*limiter == '\0' && (src_char == '\'' || src_char == '"'))
+		*limiter = src_char;
+	else
+	{
+		line[*j] = src_char;
+		(*j)++;
+	}
 }
