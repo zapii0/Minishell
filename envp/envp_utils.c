@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   envp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:17:32 by mzapora           #+#    #+#             */
-/*   Updated: 2025/11/20 16:25:28 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:10:47 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "../include/parsing.h"
 
-void	swapper_clean(char *a, char *b, char *c)
-{
-	if (a)
-		free(a);
-	if (b)
-		free(b);
-	if (c)
-		free(c);
-}
+static char	*extract_var_name(char *line, int *i);
 
 char	*get_first(char *line, int i)
 {
@@ -46,17 +38,31 @@ char	*get_first(char *line, int i)
 
 char	*get_second(char *line, int *i, t_env *envp, t_base *base)
 {
-	int		j;
-	int		k;
 	char	*name;
 	char	*value;
 
-	j = 0;
-	k = 0;
 	(*i)++;
 	value = handle_exit_status_exit(line, i, base);
 	if (value)
 		return (value);
+	name = extract_var_name(line, i);
+	if (!name)
+		return (NULL);
+	value = find_env_value(name, envp);
+	free(name);
+	if (!value)
+		return (NULL);
+	return (value);
+}
+
+static char	*extract_var_name(char *line, int *i)
+{
+	int		j;
+	int		k;
+	char	*name;
+
+	j = 0;
+	k = 0;
 	while (ft_isalnum(line[(*i) + j]) || line[(*i) + j] == '_')
 		j++;
 	name = calloc(j + 1, 1);
@@ -69,11 +75,7 @@ char	*get_second(char *line, int *i, t_env *envp, t_base *base)
 	}
 	name[k] = '\0';
 	*i += j;
-	value = find_env_value(name, envp);
-	free(name);
-	if (!value)
-		return (NULL);
-	return (value);
+	return (name);
 }
 
 char	*get_third(char *line, int i)

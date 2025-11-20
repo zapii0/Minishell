@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_structs_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apieniak <apieniak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mzapora <mzapora@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:30:49 by apieniak          #+#    #+#             */
-/*   Updated: 2025/11/20 14:54:02 by apieniak         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:11:04 by mzapora          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,14 @@ void	free_str_array(char **arr)
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
+}
+
+void	swapper_clean(char *a, char *b, char *c)
+{
+	if (a)
+		free(a);
+	if (b)
+		free(b);
+	if (c)
+		free(c);
 }
